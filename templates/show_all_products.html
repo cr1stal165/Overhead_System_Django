@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css rel=stylesheet>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap.min.css
+          rel=stylesheet>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap.min.js></script>
+    <script language="JavaScript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+</head>
+<body>
+<h1 align="center">Все товары</h1>
+<header>
+        <center>
+            <span><a href="{% url 'index' %}">Главная</a></span>
+            <span><a href="{% url 'show_manufacturer' %}">Производители</a></span>
+            <span><a href="{% url 'show_purchased' %}">Приобретенный товар</a></span>
+            <span><a href="{% url 'show_stuff' %}">Персонал</a></span>
+        </center>
+    </header>
+    <form action="{% url 'download_csv' %}">
+        <button>Скачать прайс</button>
+    </form>
+    <br><br>
+<center>
+<table cellspacing=0 class="table table-bordered table-hover table-striped" id=example width="900px">
+<thead>
+    <tr>
+        <th>Артикул</th>
+        <th>Название</th>
+        <th>Производитель</th>
+        <th>Цена</th>
+    </tr>
+    </thead>
+<tbody>
+    {% for item in all %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.manufacturer.name }}</td>
+        <td>{{ item.price }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+</center>
+<style>
+
+    tr, td {
+        border: 1px solid black;
+    }
+
+    .card {
+        height: 150px;
+        width: 500px;
+        background-color: antiquewhite;
+        border-radius: 15px;
+    }
+
+    h3{
+        margin-top: 20px;
+    }
+
+    span{
+        margin: 0 10px 0 10px;
+    }
+</style>
+</body>
+</html>

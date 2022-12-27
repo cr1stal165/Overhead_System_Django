@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css rel=stylesheet>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap.min.css
+          rel=stylesheet>
+</head>
+<body>
+
+<h1>Накладная № {{ note.id }}</h1>
+<br>
+<p>Заказчик: {{ note.customer.name }}</p>
+<p>Составитель: {{ note.worker.name }}</p>
+<p>Дата составления: {{ note.date }}</p>
+<p>Сумма заказа: {{ note.sum }}</p>
+<br>
+<h3>Приобретенные товары</h3>
+<table cellspacing=0 class="table table-bordered table-hover table-striped" id=example width="700px">
+    <thead>
+    <tr>
+        <th>Артикул</th>
+        <th>Название</th>
+        <th>Производитель</th>
+        <th>Цена</th>
+        <th>Кол-во</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for purch in prod %}
+        <tr>
+            <td>{{ purch.id }}</td>
+            <td>{{ purch.name }}</td>
+            <td>{{ purch.manufacturer.name }}</td>
+            <td>{{ purch.price }}</td>
+            <td>{{ purch.count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<span><a href="{% url 'index' %}">Главная</a></span>
+
+<form action="{% url 'delete_note' note_id=note.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Удалить</button>
+</form>
+<style>
+    p, h1 {
+        margin-left: 50px;
+    }
+
+    h1 {
+        margin-top: 50px;
+    }
+
+    td, tr {
+
+        border: 1px solid grey;
+
+    }
+
+    span{
+        margin-left: 50px;
+    }
+</style>
+</body>
+</html>

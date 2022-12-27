@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css rel=stylesheet>
+    <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap.min.css
+          rel=stylesheet>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap.min.js></script>
+    <script language="JavaScript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+</head>
+<body>
+
+<center>
+    <h1>Приобретенный товар</h1>
+    <span><a href="{% url 'index' %}">Главная</a></span>
+    <span><a href="{% url 'show_all_products' %}">Все товары</a></span>
+    <span><a href="{% url 'show_manufacturer' %}">Производители</a></span>
+    <span><a href="{% url 'show_stuff' %}">Персонал</a></span>
+</center>
+<br>
+<table cellspacing=0 class="table table-bordered table-hover table-striped" id=example width="1000px">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Производитель</th>
+        <th>Цена</th>
+        <th>Кол-во</th>
+        <th>Номер накладной</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in purch %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.manufacturer.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.count }}</td>
+            <td>Накладная № {{ product.note.id }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<style>
+     span {
+        margin: 0 10px 0 10px;
+    }
+</style>
+</body>
+</html>
