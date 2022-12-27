@@ -1,1 +1,4 @@
-# Invoice_Django_app
+# Система учета накладных 
+
+Стек технологий:
+Python, Django, Bootstrap, PostgreSQL, HTML
